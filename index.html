@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalog</title>
+    <style>
+        body {
+            background: #f4f7f6;
+            padding: 20px;
+        }
+
+        #card-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .product-card {
+            width: 280px;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .product-card img {
+            height: 180px;
+            max-width: 100%;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
+        h3 {
+            font-size: 16px;
+            height: 40px;
+            overflow: hidden;
+            color: #333;
+        }
+
+        .desc {
+            font-size: 13px;
+            color: #777;
+            height: 60px;
+            overflow: hidden;
+        }
+
+        .price {
+            font-size: 22px;
+            font-weight: bold;
+            color: #2ecc71;
+            margin: 15px 0;
+        }
+
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 style="text-align: center; font-family: sans-serif;">Каталог товаров</h1>
+    <div id="card-container">Загрузка товаров...</div>
+
+    <script>
+
+        const api = [
+            {
+                "productName": "iPhone 17 Pro",
+                "cost": 99990,
+                "image": "https://images.unsplash.com/photo-1758578938566-c986f710feb6?w=400"
+            },
+            {
+                "productName": "AirPods Pro",
+                "cost": 24990,
+                "image": "https://images.unsplash.com/photo-1606841837239-c5a1a4a07af7?w=400"
+            },
+            {
+                "productName": "MacBook Air M2",
+                "cost": 78400,
+                "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400"
+            },
+            {
+                "productName": "iPad Air",
+                "cost": 69990,
+                "image": "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400"
+            },
+            {
+                "productName": "Apple Watch Series 9",
+                "cost": 39990,
+                "image": "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=400"
+            },
+            {
+                "productName": "Блокнот Moleskine",
+                "cost": 1990,
+                "image": "https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=400"
+            },
+            {
+                "productName": "Набор карандашей Copic",
+                "cost": 4500,
+                "image": "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=400"
+            },
+            {
+                "productName": "Ручка Parker Jotter",
+                "cost": 2500,
+                "image": "https://avatars.mds.yandex.net/get-mpic/4055817/2a0000019108bf8754af06cfa90b3fe0c308/orig"
+            },
+            {
+                "productName": "Стикеры Post-it",
+                "cost": 450,
+                "image": "https://ir.ozone.ru/s3/multimedia-8/c600/6012474008.jpg"
+            },
+            {
+                "productName": "Стикеры Post-it",
+                "cost": 450,
+                "image": "https://ir.ozone.ru/s3/multimedia-8/c600/6012474008.jpg"
+            },
+            {
+                "productName": "Стикеры Post-it",
+                "cost": 450,
+                "image": "https://ir.ozone.ru/s3/multimedia-8/c600/6012474008.jpg"
+            },
+            {
+                "productName": "Стикеры Post-it",
+                "cost": 450,
+                "image": "https://ir.ozone.ru/s3/multimedia-8/c600/6012474008.jpg"
+            },
+            {
+                "productName": "Стикеры Post-it",
+                "cost": 450,
+                "image": "https://ir.ozone.ru/s3/multimedia-8/c600/6012474008.jpg"
+            },
+            {
+                "productName": "Стикеры Post-it",
+                "cost": 450,
+                "image": "https://ir.ozone.ru/s3/multimedia-8/c600/6012474008.jpg"
+            },
+            {
+                "productName": "Стикеры Post-it",
+                "cost": 450,
+                "image": "https://ir.ozone.ru/s3/multimedia-8/c600/6012474008.jpg"
+            },
+            {
+                "productName": "Стикеры Post-it",
+                "cost": 450,
+                "image": "https://ir.ozone.ru/s3/multimedia-8/c600/6012474008.jpg"
+            },
+            {
+                "productName": "Стикеры Post-it",
+                "cost": 450,
+                "image": "https://ir.ozone.ru/s3/multimedia-8/c600/6012474008.jpg"
+            },
+            {
+                "productName": "Стикеры Post-it",
+                "cost": 450,
+                "image": "https://ir.ozone.ru/s3/multimedia-8/c600/6012474008.jpg"
+            },
+            {
+                "productName": "Стикеры Post-it",
+                "cost": 450,
+                "image": "https://ir.ozone.ru/s3/multimedia-8/c600/6012474008.jpg"
+            },
+            {
+                "productName": "Стикеры Post-it",
+                "cost": 450,
+                "image": "https://ir.ozone.ru/s3/multimedia-8/c600/6012474008.jpg"
+            },
+            {
+                "productName": "Стикеры Post-it",
+                "cost": 450,
+                "image": "https://ir.ozone.ru/s3/multimedia-8/c600/6012474008.jpg"
+            },
+            {
+                "productName": "Пакет картонный",
+                "cost": 49,
+                "image": "https://images.unsplash.com/photo-1544816155-12df9643f363?w=400"
+            },
+            {
+                "productName": "iPhone 17 Pro",
+                "cost": 99990,
+                "image": "https://images.unsplash.com/photo-1758578938566-c986f710feb6?w=400"
+            },
+            {
+                "productName": "AirPods Pro",
+                "cost": 24990,
+                "image": "https://images.unsplash.com/photo-1606841837239-c5a1a4a07af7?w=400"
+            },
+            {
+                "productName": "MacBook Air M2",
+                "cost": 78400,
+                "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400"
+            },
+            {
+                "productName": "iPad Air",
+                "cost": 69990,
+                "image": "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400"
+            },
+            {
+                "productName": "Apple Watch Series 9",
+                "cost": 39990,
+                "image": "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=400"
+            },
+            {
+                "productName": "Блокнот Moleskine",
+                "cost": 1990,
+                "image": "https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=400"
+            },
+            {
+                "productName": "Набор карандашей Copic",
+                "cost": 4500,
+                "image": "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=400"
+            },
+            {
+                "productName": "Ручка Parker Jotter",
+                "cost": 2500,
+                "image": "https://avatars.mds.yandex.net/get-mpic/4055817/2a0000019108bf8754af06cfa90b3fe0c308/orig"
+            },
+            {
+                "productName": "Стикеры Post-it",
+                "cost": 450,
+                "image": "https://ir.ozone.ru/s3/multimedia-8/c600/6012474008.jpg"
+            },
+            {
+                "productName": "Стикеры Post-it",
+                "cost": 450,
+                "image": "https://ir.ozone.ru/s3/multimedia-8/c600/6012474008.jpg"
+            },
+            {
+                "productName": "Стикеры Post-it",
+                "cost": 450,
+                "image": "https://ir.ozone.ru/s3/multimedia-8/c600/6012474008.jpg"
+            },
+            {
+                "productName": "Стикеры Post-it",
+                "cost": 450,
+                "image": "https://ir.ozone.ru/s3/multimedia-8/c600/6012474008.jpg"
+            },
+            {
+                "productName": "iPhone 17 Pro",
+                "cost": 99990,
+                "image": "https://images.unsplash.com/photo-1758578938566-c986f710feb6?w=400"
+            },
+            {
+                "productName": "AirPods Pro",
+                "cost": 24990,
+                "image": "https://images.unsplash.com/photo-1606841837239-c5a1a4a07af7?w=400"
+            },
+            {
+                "productName": "MacBook Air M2",
+                "cost": 78400,
+                "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400"
+            },
+            {
+                "productName": "iPad Air",
+                "cost": 69990,
+                "image": "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400"
+            },
+            {
+                "productName": "Apple Watch Series 9",
+                "cost": 39990,
+                "image": "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=400"
+            },
+            {
+                "productName": "Блокнот Moleskine",
+                "cost": 1990,
+                "image": "https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=400"
+            },
+            {
+                "productName": "Набор карандашей Copic",
+                "cost": 4500,
+                "image": "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=400"
+            },
+            {
+                "productName": "Ручка Parker Jotter",
+                "cost": 2500,
+                "image": "https://avatars.mds.yandex.net/get-mpic/4055817/2a0000019108bf8754af06cfa90b3fe0c308/orig"
+            },
+            {
+                "productName": "Стикеры Post-it",
+                "cost": 450,
+                "image": "https://ir.ozone.ru/s3/multimedia-8/c600/6012474008.jpg"
+            },
+            {
+                "productName": "Стикеры Post-it",
+                "cost": 450,
+                "image": "https://ir.ozone.ru/s3/multimedia-8/c600/6012474008.jpg"
+            },
+            {
+                "productName": "Стикеры Post-it",
+                "cost": 450,
+                "image": "https://ir.ozone.ru/s3/multimedia-8/c600/6012474008.jpg"
+            },
+            {
+                "productName": "Стикеры Post-it",
+                "cost": 450,
+                "image": "https://ir.ozone.ru/s3/multimedia-8/c600/6012474008.jpg"
+            },
+            {
+                "productName": "iPhone 17 Pro",
+                "cost": 99990,
+                "image": "https://images.unsplash.com/photo-1758578938566-c986f710feb6?w=400"
+            },
+            {
+                "productName": "AirPods Pro",
+                "cost": 24990,
+                "image": "https://images.unsplash.com/photo-1606841837239-c5a1a4a07af7?w=400"
+            },
+            {
+                "productName": "MacBook Air M2",
+                "cost": 78400,
+                "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400"
+            },
+            {
+                "productName": "iPad Air",
+                "cost": 69990,
+                "image": "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400"
+            },
+            {
+                "productName": "Apple Watch Series 9",
+                "cost": 39990,
+                "image": "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=400"
+            },
+            {
+                "productName": "Блокнот Moleskine",
+                "cost": 1990,
+                "image": "https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=400"
+            },
+            {
+                "productName": "Набор карандашей Copic",
+                "cost": 4500,
+                "image": "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=400"
+            },
+            {
+                "productName": "Ручка Parker Jotter",
+                "cost": 2500,
+                "image": "https://avatars.mds.yandex.net/get-mpic/4055817/2a0000019108bf8754af06cfa90b3fe0c308/orig"
+            },
+            {
+                "productName": "Стикеры Post-it",
+                "cost": 450,
+                "image": "https://ir.ozone.ru/s3/multimedia-8/c600/6012474008.jpg"
+            },
+            {
+                "productName": "Стикеры Post-it",
+                "cost": 450,
+                "image": "https://ir.ozone.ru/s3/multimedia-8/c600/6012474008.jpg"
+            },
+            {
+                "productName": "Стикеры Post-it",
+                "cost": 450,
+                "image": "https://ir.ozone.ru/s3/multimedia-8/c600/6012474008.jpg"
+            },
+            {
+                "productName": "Стикеры Post-it",
+                "cost": 450,
+                "image": "https://ir.ozone.ru/s3/multimedia-8/c600/6012474008.jpg"
+            }
+
+        ]
+
+        let visibleCount = 12;
+
+        function displayProducts(products) {
+            const container = document.getElementById('card-container');
+            const productsToShow = products.slice(0, visibleCount);
+
+            container.innerHTML = productsToShow.map(item => {
+                const title = item.productName || item.title;
+                const price = item.cost || item.price;
+                const desc = item.description ? item.description.slice(0, 80) + '...' : 'Описание отсутствует';
+
+                return `
+                            <div class="product-card">
+                                <img src="${item.image}" alt="${title}">
+                                <div class="info">
+                                    <h3>${title}</h3>
+                                    <p class="desc">${desc}</p>
+                                    <div class="price">${price} Руб.</div>
+                                    <button>Купить</button>
+                                </div>
+                            </div>
+                        `;
+            }).join('');
+
+            updateButtonVisibility(products.length);
+        }
+
+        function updateButtonVisibility(total) {
+            let btn = document.getElementById('load-more');
+            if (!btn) {
+                btn = document.createElement('button');
+                btn.id = 'load-more';
+                btn.innerText = 'Показать еще';
+                btn.style.cssText = 'display: block; margin: 30px auto; width: 250px;';
+                btn.onclick = () => {
+                    visibleCount += 12;
+                    displayProducts(api);
+                };
+                document.body.appendChild(btn);
+            }
+            btn.style.display = visibleCount >= total ? 'none' : 'block';
+        }
+
+        console.log(api)
+
+        displayProducts(api);
+    </script>
+</body>
+
+</html>
