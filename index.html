@@ -173,10 +173,59 @@
             updateButtonVisibility(products.length);
         }
 
+        const controls = document.createElement('div');
+        controls.style.cssText = `
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 15px; 
+    margin: 20px auto; 
+    max-width: 600px;
+`;
+        document.body.prepend(controls);
+
+        const input = document.createElement('input');
+        input.placeholder = 'Поиск по товарам...';
+        input.style.cssText = `
+    padding: 12px 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    flex: 1;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+    font-family: sans-serif;
+`;
+        input.onfocus = () => input.style.borderColor = '#3498db';
+        input.onblur = () => input.style.borderColor = '#e0e0e0';
+
         const sortBtn = document.createElement('button');
         sortBtn.innerText = 'Сортировать по цене';
-        sortBtn.style = 'display: block; margin: 30px auto; width: 250px;';
-        document.body.prepend(sortBtn);
+        sortBtn.style.cssText = `
+    padding: 12px 20px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: sans-serif;
+    transition: background 0.3s;
+    white-space: nowrap; /* Чтобы текст кнопки не переносился */
+`;
+
+        input.oninput = () => {
+            const text = input.value.toLowerCase();
+            const filtered = api.filter(item =>
+                item.productName.toLowerCase().includes(text)
+            );
+            displayProducts(filtered);
+        };
+        sortBtn.onmouseover = () => sortBtn.style.background = '#2980b9';
+        sortBtn.onmouseout = () => sortBtn.style.background = '#3498db';
+
+        controls.appendChild(input);
+        controls.appendChild(sortBtn);
 
         let asc = true;
 
@@ -185,7 +234,6 @@
             api.sort((a, b) => asc ? a.cost - b.cost : b.cost - a.cost);
             displayProducts(api);
         };
-
 
         function updateButtonVisibility(total) {
             let btn = document.getElementById('load-more');
