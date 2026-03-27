@@ -15,7 +15,7 @@
             display: flex;
             gap: 20px;
             flex-wrap: wrap;
-            justify-content: center;
+            justify-content: left;
         }
 
         .product-card {
@@ -213,6 +213,39 @@
     transition: background 0.3s;
     white-space: nowrap; /* Чтобы текст кнопки не переносился */
 `;
+
+        const priceBox = document.createElement('div');
+        priceBox.style.cssText = 'display: flex; gap: 10px; align-items: center;';
+
+        const minInp = document.createElement('input');
+        minInp.placeholder = 'Цена от';
+        minInp.type = 'number';
+        minInp.style.cssText = 'padding: 12px; border: 2px solid #e0e0e0; border-radius: 10px; width: 100px;';
+
+        const maxInp = document.createElement('input');
+        maxInp.placeholder = 'до';
+        maxInp.type = 'number';
+        maxInp.style.cssText = 'padding: 12px; border: 2px solid #e0e0e0; border-radius: 10px; width: 100px;';
+
+        priceBox.append(minInp, maxInp);
+        controls.append(priceBox);
+
+        function update() {
+            const min = parseFloat(minInp.value) || 0;
+            const max = parseFloat(maxInp.value) || Infinity;
+            const text = input.value.toLowerCase();
+
+            const filtered = api.filter(item =>
+                item.productName.toLowerCase().includes(text) &&
+                item.cost >= min &&
+                item.cost <= max
+            );
+            displayProducts(filtered);
+        }
+
+        minInp.oninput = update;
+        maxInp.oninput = update;
+        input.oninput = update;
 
         input.oninput = () => {
             const text = input.value.toLowerCase();
