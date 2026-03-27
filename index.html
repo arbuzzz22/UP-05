@@ -146,71 +146,6 @@
                 "productName": "Шариковые ручки синие Slender",
                 "cost": 115,
                 "image": "https://ir.ozone.ru/s3/multimedia-1-r/wc1000/9163260819.jpg"
-            },
-            {
-                "productName": "iPhone 17 Pro",
-                "cost": 99990,
-                "image": "https://ir.ozone.ru/s3/multimedia-1-7/wc1000/8983090339.jpg"
-            },
-            {
-                "productName": "AirPods Pro",
-                "cost": 24990,
-                "image": "https://ir.ozone.ru/s3/multimedia-1-u/wc1000/8420101266.jpg"
-            },
-            {
-                "productName": "MacBook Air M2",
-                "cost": 78400,
-                "image": "https://ir.ozone.ru/s3/multimedia-1-y/wc1000/9486792826.jpg"
-            },
-            {
-                "productName": "iPad Air",
-                "cost": 69990,
-                "image": "https://ir.ozone.ru/s3/multimedia-1-f/wc1000/8250667251.jpg"
-            },
-            {
-                "productName": "Apple Watch Series 9",
-                "cost": 39990,
-                "image": "https://ir.ozone.ru/s3/multimedia-1-p/wc1000/8002334257.jpg"
-            },
-            {
-                "productName": "Коврик для мышки и клавиатуры XXL",
-                "cost": 450,
-                "image": "https://ir.ozone.ru/s3/multimedia-1-w/wc1000/7959800084.jpg"
-            },
-            {
-                "productName": "Logitech G102",
-                "cost": 1200,
-                "image": "https://ir.ozone.ru/s3/multimedia-1-g/wc1000/8189738296.jpg"
-            },
-            {
-                "productName": "Xiaomi Redmi Buds 8",
-                "cost": 2000,
-                "image": "https://ir.ozone.ru/s3/multimedia-1-1/wc1000/8986596517.jpg"
-            },
-            {
-                "productName": "Hartens 24`` Монитор HTM24OP100",
-                "cost": 79500,
-                "image": "https://ir.ozone.ru/s3/multimedia-1-g/wc1000/8810865268.jpg"
-            },
-            {
-                "productName": "Casio Часы",
-                "cost": 10500,
-                "image": "https://ir.ozone.ru/s3/multimedia-1-x/wc1000/9158896005.jpg"
-            },
-            {
-                "productName": "Блокнот А6 60 листов",
-                "cost": 75,
-                "image": "https://ir.ozone.ru/s3/multimedia-1-q/wc1000/7505713502.jpg"
-            },
-            {
-                "productName": "Простые карандаши",
-                "cost": 65,
-                "image": "https://ir.ozone.ru/s3/multimedia-1-s/wc1000/9386060644.jpg"
-            },
-            {
-                "productName": "Шариковые ручки синие Slender",
-                "cost": 115,
-                "image": "https://ir.ozone.ru/s3/multimedia-1-r/wc1000/9163260819.jpg"
             }
         ]
 
@@ -237,6 +172,20 @@
 
             updateButtonVisibility(products.length);
         }
+
+        const sortBtn = document.createElement('button');
+        sortBtn.innerText = 'Сортировать по цене';
+        sortBtn.style = 'display: block; margin: 30px auto; width: 250px;';
+        document.body.prepend(sortBtn);
+
+        let asc = true;
+
+        sortBtn.onclick = () => {
+            asc = !asc;
+            api.sort((a, b) => asc ? a.cost - b.cost : b.cost - a.cost);
+            displayProducts(api);
+        };
+
 
         function updateButtonVisibility(total) {
             let btn = document.getElementById('load-more');
